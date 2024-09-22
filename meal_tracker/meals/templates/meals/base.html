@@ -1,0 +1,49 @@
+<!-- base.html -->
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <h1>Your Meals</h1>
+    
+
+    <!-- Meal Addition Form -->
+    <h2>Add Meal</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Meal</button>
+    </form>
+
+    <!-- Display Meals -->
+    <h2>Current Meals</h2>
+    <ul>
+        {% for meal in meals %}
+            <li>
+                Meal Name: {{ meal.meal_name }}, 
+                Type: {{ meal.meal_type }}, 
+                Times Consumed: {{ meal.times_consumed }}, 
+                Expiration: {{ meal.food_expiration }}
+            </li>
+        {% empty %}
+            <li>No meals added yet.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Sustainability Tips -->
+<h2>Sustainability Tips:</h2>
+<p>Consider incorporating more plant-based meals into your diet for reduced environmental impact.</p>
+<p>Buy local and seasonal produce to support local farmers and reduce carbon footprints.</p>
+
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+    <footer></footer>
+        <p>&copy; 2024 My Meal Tracker</p>
+    </footer>
+</body>
+</html>

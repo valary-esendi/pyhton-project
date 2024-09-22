@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Meal Tracker</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">  <!-- Assuming you have a style.css for styling -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to Meal Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'meals' %}">Your Meals</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Track Your Meals Effectively</h2>
+            <p>Meal Tracker helps you keep track of what you've eaten, when, and how often. Create an account to start logging your meals today!</p>
+        </section>
+
+        <section>
+            <h2>Features</h2>
+            <ul>
+                <li>Easy meal logging</li>
+                <li>Track expiration dates of food</li>
+                <li>Monitor consumption frequency</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Meal Tracker. All rights reserved.</p>
+    </footer>
+</body>
+</html>
