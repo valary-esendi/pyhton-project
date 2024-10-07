@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Meal 
 from django.views import View
-
+from .forms import MemberForm
+from .models import Member
 from .forms import MealForm
 from django.contrib import messages  # Import messages for feedback
 
@@ -91,3 +92,20 @@ def meals_view(request):
     else:
         print("Unauthorized access attempt to meals view. Redirecting to login.")
         return redirect('login')  # Redirect to login if not authenticated
+    
+
+def add_member(request):
+    if request.method == 'POST':
+        form = MemberForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save data to the database
+            return redirect('/membersList')  # Redirect to a success page after submission
+    else:
+        form = MemberForm()
+    
+    return render(request, 'main/addMember.html', {'form': form})
+
+# View to display the list of members
+def members_list(request):
+    members = Member.objects.all()  # Fetch all members from the database
+    return render(request, 'main/membersList.html', {'members': members})
